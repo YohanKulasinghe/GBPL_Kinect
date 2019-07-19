@@ -1,0 +1,293 @@
+﻿<Window x:Class="KinectStreams.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       Title="Kinect | Color, Depth, Infrared" Height="850" Width="1480" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+      <Image Name="camera"  Height="500" Margin="0,0,100,50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+      <Canvas Name="canvas" />
+      <Label x:Name="NotificationBlock"  Content="No Abnomalisam" Width ="160" Height="50" Margin="-1300,-750,1,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="GreenYellow"/>
+      <Label x:Name="Title"  Content="Kinect Skeleton Abnormalism Detection Program" Width ="760" Height="50" Margin="800,-750,1,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize ="25"/>
+      <Label x:Name="Alert"  Content="No Abnormalism Detected" Width ="450" Height="50" Margin="900,-600,1,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize ="25"/>
+
+      <Grid Style="{StaticResource GridButtonsStyle}">
+            <StackPanel Style="{StaticResource StackPanelButtonsStyle}">
+                <Button Content="Color" Style="{StaticResource ButtonStyle}" Click="Color_Click" />
+                <Button Content="Depth" Style="{StaticResource ButtonStyle}" Click="Depth_Click" />
+                <Button Content="Infrared" Style="{StaticResource ButtonStyle}" Click="Infrared_Click" />
+                <Button Content="Skeleton" Style="{StaticResource ButtonStyle}" Click="Body_Click" Background ="yellow"/>
+                <Button Content="Reset" Style="{StaticResource ButtonStyle}" Click="Reset_Click" Background ="skyblue" />
+            </StackPanel>
+        </Grid>
+
+      <Grid>
+        <TextBlock x:Name="Head" HorizontalAlignment="Left" Margin="5,500,0,0" TextWrapping="Wrap" Text="Head Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadlX" HorizontalAlignment="Left" Margin="10,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadX" HorizontalAlignment="Left" Margin="22,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadlY" HorizontalAlignment="Left" Margin="10,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadY" HorizontalAlignment="Left" Margin="22,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadlZ" HorizontalAlignment="Left" Margin="10,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HeadZ" HorizontalAlignment="Left" Margin="22,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="Neck" HorizontalAlignment="Left" Margin="5,560,0,0" TextWrapping="Wrap" Text="Neck Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NecklX" HorizontalAlignment="Left" Margin="10,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NeckX" HorizontalAlignment="Left" Margin="22,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NecklY" HorizontalAlignment="Left" Margin="10,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NeckY" HorizontalAlignment="Left" Margin="22,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NecklZ" HorizontalAlignment="Left" Margin="10,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NeckZ" HorizontalAlignment="Left" Margin="22,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="SpineMid" HorizontalAlignment="Left" Margin="5,620,0,0" TextWrapping="Wrap" Text="SpineMid Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidlX" HorizontalAlignment="Left" Margin="10,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidX" HorizontalAlignment="Left" Margin="22,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidlY" HorizontalAlignment="Left" Margin="10,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidY" HorizontalAlignment="Left" Margin="22,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidlZ" HorizontalAlignment="Left" Margin="10,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineMidZ" HorizontalAlignment="Left" Margin="22,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="SpineBase" HorizontalAlignment="Left" Margin="5,680,0,0" TextWrapping="Wrap" Text="SpineBase Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaselX" HorizontalAlignment="Left" Margin="10,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaseX" HorizontalAlignment="Left" Margin="22,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaselY" HorizontalAlignment="Left" Margin="10,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaseY" HorizontalAlignment="Left" Margin="22,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaselZ" HorizontalAlignment="Left" Margin="10,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineBaseZ" HorizontalAlignment="Left" Margin="22,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="ShoulderLeft" HorizontalAlignment="Left" Margin="140,500,0,0" TextWrapping="Wrap" Text="ShoulderLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftlX" HorizontalAlignment="Left" Margin="145,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftX" HorizontalAlignment="Left" Margin="157,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftlY" HorizontalAlignment="Left" Margin="145,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftY" HorizontalAlignment="Left" Margin="157,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftlZ" HorizontalAlignment="Left" Margin="145,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderLeftZ" HorizontalAlignment="Left" Margin="157,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="ElbowLeft" HorizontalAlignment="Left" Margin="140,560,0,0" TextWrapping="Wrap" Text="ElbowLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftlX" HorizontalAlignment="Left" Margin="145,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftX" HorizontalAlignment="Left" Margin="157,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftlY" HorizontalAlignment="Left" Margin="145,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftY" HorizontalAlignment="Left" Margin="157,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftlZ" HorizontalAlignment="Left" Margin="145,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowLeftZ" HorizontalAlignment="Left" Margin="157,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="WristLeft" HorizontalAlignment="Left" Margin="140,620,0,0" TextWrapping="Wrap" Text="WristLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftlX" HorizontalAlignment="Left" Margin="145,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftX" HorizontalAlignment="Left" Margin="157,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftlY" HorizontalAlignment="Left" Margin="145,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftY" HorizontalAlignment="Left" Margin="157,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftlZ" HorizontalAlignment="Left" Margin="145,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristLeftZ" HorizontalAlignment="Left" Margin="157,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="HandLeft" HorizontalAlignment="Left" Margin="140,680,0,0" TextWrapping="Wrap" Text="HandLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftlX" HorizontalAlignment="Left" Margin="145,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftX" HorizontalAlignment="Left" Margin="157,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftlY" HorizontalAlignment="Left" Margin="145,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftY" HorizontalAlignment="Left" Margin="157,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftlZ" HorizontalAlignment="Left" Margin="145,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandLeftZ" HorizontalAlignment="Left" Margin="157,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+
+
+      
+      
+
+
+
+      <Grid>
+        <TextBlock x:Name="ShoulderRight" HorizontalAlignment="Left" Margin="310,500,0,0" TextWrapping="Wrap" Text="ShoulderRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightlX" HorizontalAlignment="Left" Margin="315,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightX" HorizontalAlignment="Left" Margin="327,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightlY" HorizontalAlignment="Left" Margin="315,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightY" HorizontalAlignment="Left" Margin="327,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightlZ" HorizontalAlignment="Left" Margin="315,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ShoulderRightZ" HorizontalAlignment="Left" Margin="327,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="ElbowRight" HorizontalAlignment="Left" Margin="310,560,0,0" TextWrapping="Wrap" Text="ElbowRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightlX" HorizontalAlignment="Left" Margin="315,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightX" HorizontalAlignment="Left" Margin="327,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightlY" HorizontalAlignment="Left" Margin="315,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightY" HorizontalAlignment="Left" Margin="327,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightlZ" HorizontalAlignment="Left" Margin="315,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ElbowRightZ" HorizontalAlignment="Left" Margin="327,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="WristRight" HorizontalAlignment="Left" Margin="310,620,0,0" TextWrapping="Wrap" Text="WristRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightlX" HorizontalAlignment="Left" Margin="315,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightX" HorizontalAlignment="Left" Margin="327,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightlY" HorizontalAlignment="Left" Margin="315,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightY" HorizontalAlignment="Left" Margin="327,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightlZ" HorizontalAlignment="Left" Margin="315,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="WristRightZ" HorizontalAlignment="Left" Margin="327,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="HandRight" HorizontalAlignment="Left" Margin="310,680,0,0" TextWrapping="Wrap" Text="HandRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightlX" HorizontalAlignment="Left" Margin="315,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightX" HorizontalAlignment="Left" Margin="327,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightlY" HorizontalAlignment="Left" Margin="315,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightY" HorizontalAlignment="Left" Margin="327,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightlZ" HorizontalAlignment="Left" Margin="315,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandRightZ" HorizontalAlignment="Left" Margin="327,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="HipLeft" HorizontalAlignment="Left" Margin="480,500,0,0" TextWrapping="Wrap" Text="HipLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftlX" HorizontalAlignment="Left" Margin="485,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftX" HorizontalAlignment="Left" Margin="497,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftlY" HorizontalAlignment="Left" Margin="485,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftY" HorizontalAlignment="Left" Margin="497,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftlZ" HorizontalAlignment="Left" Margin="485,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipLeftZ" HorizontalAlignment="Left" Margin="497,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="KneeLeft" HorizontalAlignment="Left" Margin="480,560,0,0" TextWrapping="Wrap" Text="KneeLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftlX" HorizontalAlignment="Left" Margin="485,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftX" HorizontalAlignment="Left" Margin="497,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftlY" HorizontalAlignment="Left" Margin="485,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftY" HorizontalAlignment="Left" Margin="497,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftlZ" HorizontalAlignment="Left" Margin="485,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeLeftZ" HorizontalAlignment="Left" Margin="497,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="AnkleLeft" HorizontalAlignment="Left" Margin="480,620,0,0" TextWrapping="Wrap" Text="AnkleLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftlX" HorizontalAlignment="Left" Margin="485,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftX" HorizontalAlignment="Left" Margin="497,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftlY" HorizontalAlignment="Left" Margin="485,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftY" HorizontalAlignment="Left" Margin="497,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftlZ" HorizontalAlignment="Left" Margin="485,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleLeftZ" HorizontalAlignment="Left" Margin="497,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="FootLeft" HorizontalAlignment="Left" Margin="480,680,0,0" TextWrapping="Wrap" Text="FootLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftlX" HorizontalAlignment="Left" Margin="485,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftX" HorizontalAlignment="Left" Margin="497,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftlY" HorizontalAlignment="Left" Margin="485,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftY" HorizontalAlignment="Left" Margin="497,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftlZ" HorizontalAlignment="Left" Margin="485,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootLeftZ" HorizontalAlignment="Left" Margin="497,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+
+
+
+
+
+
+
+      <Grid>
+        <TextBlock x:Name="HipRight" HorizontalAlignment="Left" Margin="620,500,0,0" TextWrapping="Wrap" Text="HipRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightlX" HorizontalAlignment="Left" Margin="625,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightX" HorizontalAlignment="Left" Margin="637,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightlY" HorizontalAlignment="Left" Margin="625,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightY" HorizontalAlignment="Left" Margin="637,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightlZ" HorizontalAlignment="Left" Margin="625,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HipRightZ" HorizontalAlignment="Left" Margin="637,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="KneeRight" HorizontalAlignment="Left" Margin="620,560,0,0" TextWrapping="Wrap" Text="KneeRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightlX" HorizontalAlignment="Left" Margin="625,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightX" HorizontalAlignment="Left" Margin="637,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightlY" HorizontalAlignment="Left" Margin="625,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightY" HorizontalAlignment="Left" Margin="637,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightlZ" HorizontalAlignment="Left" Margin="625,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="KneeRightZ" HorizontalAlignment="Left" Margin="637,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="AnkleRight" HorizontalAlignment="Left" Margin="620,620,0,0" TextWrapping="Wrap" Text="AnkleRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightlX" HorizontalAlignment="Left" Margin="625,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightX" HorizontalAlignment="Left" Margin="637,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightlY" HorizontalAlignment="Left" Margin="625,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightY" HorizontalAlignment="Left" Margin="637,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightlZ" HorizontalAlignment="Left" Margin="625,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AnkleRightZ" HorizontalAlignment="Left" Margin="637,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="FootRight" HorizontalAlignment="Left" Margin="620,680,0,0" TextWrapping="Wrap" Text="FootRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightlX" HorizontalAlignment="Left" Margin="625,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightX" HorizontalAlignment="Left" Margin="637,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightlY" HorizontalAlignment="Left" Margin="625,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightY" HorizontalAlignment="Left" Margin="637,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightlZ" HorizontalAlignment="Left" Margin="625,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FootRightZ" HorizontalAlignment="Left" Margin="637,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="SpineShoulder" HorizontalAlignment="Left" Margin="755,500,0,0" TextWrapping="Wrap" Text="SpineShoulder Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderlX" HorizontalAlignment="Left" Margin="760,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderX" HorizontalAlignment="Left" Margin="792,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderlY" HorizontalAlignment="Left" Margin="760,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderY" HorizontalAlignment="Left" Margin="792,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderlZ" HorizontalAlignment="Left" Margin="760,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="SpineShoulderZ" HorizontalAlignment="Left" Margin="792,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="HandTipLeft" HorizontalAlignment="Left" Margin="755,560,0,0" TextWrapping="Wrap" Text="HandTipLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftlX" HorizontalAlignment="Left" Margin="760,575,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftX" HorizontalAlignment="Left" Margin="792,575,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftlY" HorizontalAlignment="Left" Margin="760,585,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftY" HorizontalAlignment="Left" Margin="792,585,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftlZ" HorizontalAlignment="Left" Margin="760,595,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipLeftZ" HorizontalAlignment="Left" Margin="792,595,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="ThumbLeft" HorizontalAlignment="Left" Margin="755,620,0,0" TextWrapping="Wrap" Text="ThumbLeft Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftlX" HorizontalAlignment="Left" Margin="760,635,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftX" HorizontalAlignment="Left" Margin="792,635,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftlY" HorizontalAlignment="Left" Margin="760,645,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftY" HorizontalAlignment="Left" Margin="792,645,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftlZ" HorizontalAlignment="Left" Margin="760,655,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbLeftZ" HorizontalAlignment="Left" Margin="792,655,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+      <Grid>
+        <TextBlock x:Name="HandTipRight" HorizontalAlignment="Left" Margin="755,680,0,0" TextWrapping="Wrap" Text="HandTipRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightlX" HorizontalAlignment="Left" Margin="760,695,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightX" HorizontalAlignment="Left" Margin="792,695,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightlY" HorizontalAlignment="Left" Margin="760,705,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightY" HorizontalAlignment="Left" Margin="792,705,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightlZ" HorizontalAlignment="Left" Margin="760,715,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="HandTipRightZ" HorizontalAlignment="Left" Margin="792,715,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+
+
+      <Grid>
+        <TextBlock x:Name="ThumbRight" HorizontalAlignment="Left" Margin="900,500,0,0" TextWrapping="Wrap" Text="ThumbRight Positions" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightlX" HorizontalAlignment="Left" Margin="905,515,0,0" TextWrapping="Wrap" Text="X:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightX" HorizontalAlignment="Left" Margin="917,515,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightlY" HorizontalAlignment="Left" Margin="905,525,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightY" HorizontalAlignment="Left" Margin="917,525,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightlZ" HorizontalAlignment="Left" Margin="905,535,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ThumbRightZ" HorizontalAlignment="Left" Margin="917,535,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+      </Grid>
+      
+      
+      
+      
+      
+      
+    </Grid>
+</Window>
